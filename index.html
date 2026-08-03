@@ -75,7 +75,9 @@
     transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, background .25s, color .25s;
     position:relative;overflow:hidden;
   }
-  .btn-primary{background:var(--black);color:#fff;}
+  .btn-primary{background:linear-gradient(135deg, #1a1a1a, var(--black));color:#fff;box-shadow:0 10px 30px rgba(17,17,17,0.25), 0 0 0 1px rgba(45,168,255,0.15) inset;}
+  .btn-primary svg{width:19px;height:19px;fill:var(--celeste);}
+  .btn-primary:hover svg{fill:#fff;}
   .btn-primary:hover{background:var(--celeste-deep);transform:translateY(-3px);box-shadow:0 14px 30px rgba(45,168,255,0.3);}
   .btn-outline{border:1.5px solid rgba(17,17,17,0.15);color:var(--black);}
   .btn-outline:hover{border-color:var(--celeste);color:var(--celeste-deep);transform:translateY(-3px);}
@@ -124,6 +126,14 @@
   /* ===== NAV ===== */
   #navbar{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 0;transition:background .3s, padding .3s, box-shadow .3s;}
   #navbar.scrolled{background:rgba(247,244,239,0.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line);padding:14px 0;}
+  #navbar .logo{color:rgba(247,244,239,0.92);transition:color .3s;}
+  #navbar.scrolled .logo{color:var(--black);}
+  #navbar .nav-links a{color:rgba(247,244,239,0.85);transition:color .3s, opacity .2s;}
+  #navbar.scrolled .nav-links a{color:var(--black);}
+  #navbar .mobile-toggle{color:rgba(247,244,239,0.92);transition:color .3s;}
+  #navbar.scrolled .mobile-toggle{color:var(--black);}
+  #navbar .nav-cta .btn-outline{border-color:rgba(247,244,239,0.4);color:rgba(247,244,239,0.92);}
+  #navbar.scrolled .nav-cta .btn-outline{border-color:rgba(17,17,17,0.15);color:var(--black);}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;}
   .logo{font-family:var(--font-display);font-weight:700;font-size:1.2rem;display:flex;align-items:center;gap:10px;}
   .logo .mark{width:32px;height:32px;border-radius:9px;background:var(--black);display:flex;align-items:center;justify-content:center;color:var(--celeste);font-size:0.88rem;font-weight:700;}
@@ -341,6 +351,7 @@
       box-shadow:-10px 0 40px rgba(0,0,0,0.1);
     }
     .nav-links.open{transform:translateX(0);}
+    .nav-links.open a{color:var(--black)!important;}
     .nav-cta .btn-outline{display:none;}
     .mobile-toggle{display:block;}
     .benef-grid{grid-template-columns:1fr;}
@@ -386,7 +397,10 @@
       <h1>Tu negocio merece un sitio web que <span>inspire confianza</span></h1>
       <p class="lead">Convierto visitas en clientes: diseño moderno, carga rápida y una experiencia pensada para vender, lista en 48/72 horas.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://wa.me/5548998163063" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-primary" href="https://wa.me/5548998163063" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.42-1.42a9.87 9.87 0 0 0 4.62 1.17h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.06h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.03-.2-.31a8.2 8.2 0 0 1-1.25-4.3c0-4.53 3.69-8.22 8.23-8.22a8.18 8.18 0 0 1 8.21 8.22c0 4.53-3.69 8.15-8.22 8.15zm4.5-6.13c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.17.25-.64.8-.79.96-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.21-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14 0-.31-.02-.48-.02-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.56.12.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.17-.06-.11-.23-.17-.48-.29z"/></svg>
+          WhatsApp
+        </a>
       </div>
       <div class="hero-stats">
         <div class="stat"><div class="num" data-count="40">0<span>+</span></div><div class="lbl">Proyectos</div></div>
