@@ -139,9 +139,37 @@
   #hero{min-height:100vh;display:flex;align-items:center;padding:150px 0 90px;overflow:hidden;}
   .hero-bg-shapes{position:absolute;inset:0;z-index:0;pointer-events:none;}
   .shape{position:absolute;border-radius:50%;filter:blur(2px);opacity:0.5;}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;align-items:center;}
+  .hero-inner{text-align:left;}
+  .hero-inner h1{font-size:clamp(2.4rem,4.6vw,3.5rem);line-height:1.12;}
+  .hero-inner h1 span{color:var(--celeste-deep);}
+  .hero-inner .lead{margin:24px 0 34px;font-size:1.1rem;color:var(--gray);max-width:480px;}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;}
+  .hero-stats{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:440px;}
+  .stat{text-align:left;}
   .shape.s1{width:420px;height:420px;background:radial-gradient(circle, rgba(45,168,255,0.16), transparent 70%);top:-120px;right:-100px;}
   .shape.s2{width:300px;height:300px;background:radial-gradient(circle, rgba(45,168,255,0.12), transparent 70%);bottom:-80px;left:-60px;}
   .dot-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(17,17,17,0.06) 1px, transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 60% 50% at 50% 30%, black 20%, transparent 75%);}
+
+  .mock-browser{
+    background:var(--black);border-radius:16px;overflow:hidden;
+    box-shadow:0 40px 80px rgba(17,17,17,0.2);
+  }
+  .mock-bar{display:flex;align-items:center;gap:8px;padding:14px 16px;background:#1c1c1c;}
+  .mock-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.18);}
+  .mock-url{margin-left:12px;flex:1;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);font-family:var(--font-mono);font-size:0.72rem;padding:6px 12px;border-radius:6px;}
+  .mock-body{padding:30px 26px;min-height:280px;position:relative;}
+  .mock-code{font-family:var(--font-mono);font-size:0.86rem;line-height:1.9;color:rgba(255,255,255,0.85);white-space:pre-wrap;}
+  .mock-code .tag{color:var(--celeste);}
+  .mock-cursor{display:inline-block;width:7px;height:1.1em;background:var(--celeste);vertical-align:text-bottom;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .mock-render{position:absolute;inset:26px;background:#fff;border-radius:12px;padding:26px;opacity:0;transform:scale(0.97);transition:opacity .5s ease, transform .5s ease;display:flex;flex-direction:column;justify-content:center;gap:12px;}
+  .mock-render.show{opacity:1;transform:scale(1);}
+  .mock-render .r-eyebrow{width:70px;height:8px;background:var(--celeste-tint);border-radius:4px;}
+  .mock-render .r-title{width:78%;height:18px;background:var(--black);border-radius:4px;}
+  .mock-render .r-line{width:92%;height:9px;background:#EEE;border-radius:4px;}
+  .mock-render .r-line.short{width:60%;}
+  .mock-render .r-btn{margin-top:8px;width:120px;height:34px;background:var(--celeste);border-radius:8px;}
   .hero-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center;}
   .hero-inner h1{font-size:clamp(2.5rem,5.6vw,4rem);line-height:1.1;}
   .hero-inner h1 span{color:var(--celeste-deep);}
@@ -318,6 +346,13 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-inner{text-align:center;}
+    .hero-inner .lead{margin-left:auto;margin-right:auto;}
+    .hero-cta{justify-content:center;}
+    .hero-stats{margin-left:auto;margin-right:auto;}
+    .stat{text-align:center;}
+    .mock-browser{order:2;max-width:460px;margin:0 auto;}
     #sobre .wrap{grid-template-columns:1fr;text-align:center;}
     #sobre .sobre-text .eyebrow{justify-content:center;}
     #sobre .sobre-text p{margin-left:auto;margin-right:auto;}
@@ -365,7 +400,6 @@
       <li><a href="#hero" onclick="closeMenu()">Inicio</a></li>
       <li><a href="#sobre" onclick="closeMenu()">Sobre mí</a></li>
       <li><a href="#servicios" onclick="closeMenu()">Servicios</a></li>
-      <li><a href="#portfolio" onclick="closeMenu()">Portfolio</a></li>
       <li><a href="#proceso" onclick="closeMenu()">Proceso</a></li>
       <li><a href="#faq" onclick="closeMenu()">Preguntas</a></li>
     </ul>
@@ -383,8 +417,8 @@
     <div class="shape s2"></div>
     <div class="dot-grid"></div>
   </div>
-  <div class="wrap">
-    <div class="hero-inner reveal-up in">
+  <div class="wrap hero-grid">
+    <div class="hero-inner reveal-left in">
       <h1>Tu negocio merece un sitio web que <span>inspire confianza</span></h1>
       <p class="lead">Convierto visitas en clientes: diseño moderno, carga rápida y una experiencia pensada para vender, lista en 48/72 horas.</p>
       <div class="hero-cta">
@@ -394,6 +428,22 @@
         <div class="stat"><div class="num" data-count="40">0<span>+</span></div><div class="lbl">Proyectos</div></div>
         <div class="stat"><div class="num" data-count="35">0<span>+</span></div><div class="lbl">Clientes</div></div>
         <div class="stat"><div class="num" data-count="3">0<span>+</span></div><div class="lbl">Años</div></div>
+      </div>
+    </div>
+    <div class="mock-browser reveal-right in">
+      <div class="mock-bar">
+        <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+        <div class="mock-url">tunegocio.com</div>
+      </div>
+      <div class="mock-body">
+        <div class="mock-code" id="mockCode"></div>
+        <div class="mock-render" id="mockRender">
+          <div class="r-eyebrow"></div>
+          <div class="r-title"></div>
+          <div class="r-line"></div>
+          <div class="r-line short"></div>
+          <div class="r-btn"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -485,67 +535,6 @@
       <div class="bento-item reveal-up">
         <h3>Buena relación calidad-precio</h3>
         <p>Presupuestos claros, sin sorpresas.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <div class="wrap">
-    <div class="section-head center reveal-up">
-      <div class="eyebrow">Portfolio</div>
-      <h2>Proyectos recientes</h2>
-      <p>Una muestra del tipo de sitios que puedo crear para tu negocio.</p>
-    </div>
-    <div class="port-grid">
-      <div class="port-card reveal-up">
-        <div class="port-visual">
-          <div class="ph-grad" style="background:linear-gradient(135deg,#2DA8FF,#111111);"></div>
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
-          <div class="port-overlay"><a class="btn btn-celeste" href="#">Ver proyecto</a></div>
-        </div>
-        <div class="port-info"><div class="cat">Sitio institucional</div><h3>Estudio Jurídico</h3></div>
-      </div>
-      <div class="port-card reveal-up">
-        <div class="port-visual">
-          <div class="ph-grad" style="background:linear-gradient(135deg,#111111,#2DA8FF);"></div>
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
-          <div class="port-overlay"><a class="btn btn-celeste" href="#">Ver proyecto</a></div>
-        </div>
-        <div class="port-info"><div class="cat">Salud y bienestar</div><h3>Clínica Dental</h3></div>
-      </div>
-      <div class="port-card reveal-up">
-        <div class="port-visual">
-          <div class="ph-grad" style="background:linear-gradient(135deg,#EAF6FF,#2DA8FF);"></div>
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
-          <div class="port-overlay"><a class="btn btn-celeste" href="#">Ver proyecto</a></div>
-        </div>
-        <div class="port-info"><div class="cat">Landing page</div><h3>Lanzamiento de Producto</h3></div>
-      </div>
-      <div class="port-card reveal-up">
-        <div class="port-visual">
-          <div class="ph-grad" style="background:linear-gradient(135deg,#111111,#3d3d3d);"></div>
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M3 6h18l-1.5 11a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 6z"/><path d="M8 6V4a4 4 0 0 1 8 0v2"/></svg>
-          <div class="port-overlay"><a class="btn btn-celeste" href="#">Ver proyecto</a></div>
-        </div>
-        <div class="port-info"><div class="cat">E-commerce</div><h3>Tienda de Diseño</h3></div>
-      </div>
-      <div class="port-card reveal-up">
-        <div class="port-visual">
-          <div class="ph-grad" style="background:linear-gradient(135deg,#2DA8FF,#EAF6FF);"></div>
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg>
-          <div class="port-overlay"><a class="btn btn-celeste" href="#">Ver proyecto</a></div>
-        </div>
-        <div class="port-info"><div class="cat">Inmobiliaria</div><h3>Grupo Inmobiliario</h3></div>
-      </div>
-      <div class="port-card reveal-up">
-        <div class="port-visual">
-          <div class="ph-grad" style="background:linear-gradient(135deg,#3d3d3d,#2DA8FF);"></div>
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M4 19h16M6 19V9l6-4 6 4v10"/></svg>
-          <div class="port-overlay"><a class="btn btn-celeste" href="#">Ver proyecto</a></div>
-        </div>
-        <div class="port-info"><div class="cat">Gastronomía</div><h3>Restaurante Boutique</h3></div>
       </div>
     </div>
   </div>
@@ -811,6 +800,45 @@
       shapes.style.transform = `translateY(${y*0.15}px)`;
     }
   });
+
+  // Hero mockup: typewriter -> render -> loop
+  const codeLines = [
+    { t: '<span class="tag">&lt;h1&gt;</span>Tu marca merece más<span class="tag">&lt;/h1&gt;</span>' },
+    { t: '<span class="tag">&lt;p&gt;</span>Un sitio rápido, moderno y hecho para vender.<span class="tag">&lt;/p&gt;</span>' },
+    { t: '<span class="tag">&lt;button&gt;</span>Hablemos por WhatsApp<span class="tag">&lt;/button&gt;</span>' }
+  ];
+  const mockCode = document.getElementById('mockCode');
+  const mockRender = document.getElementById('mockRender');
+
+  async function typeLine(html, el){
+    return new Promise(resolve => {
+      let i = 0;
+      el.innerHTML = '';
+      const interval = setInterval(() => {
+        i += 3;
+        el.innerHTML = html.slice(0, i) + '<span class="mock-cursor"></span>';
+        if(i >= html.length){ clearInterval(interval); resolve(); }
+      }, 14);
+    });
+  }
+
+  async function mockLoop(){
+    while(true){
+      mockRender.classList.remove('show');
+      mockCode.style.opacity = '1';
+      let acc = '';
+      for(const line of codeLines){
+        acc += line.t + '\n';
+        await typeLine(acc, mockCode);
+        await new Promise(r => setTimeout(r, 260));
+      }
+      await new Promise(r => setTimeout(r, 500));
+      mockCode.style.opacity = '0';
+      mockRender.classList.add('show');
+      await new Promise(r => setTimeout(r, 2600));
+    }
+  }
+  mockLoop();
 </script>
 
 </body>
