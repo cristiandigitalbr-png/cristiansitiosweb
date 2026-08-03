@@ -270,13 +270,15 @@
   .faq-a p{padding:0 2px 24px;color:var(--gray);font-size:0.96rem;max-width:600px;}
 
   /* ===== CTA FINAL ===== */
-  #cta-final{background:var(--celeste);color:#fff;text-align:center;overflow:hidden;position:relative;}
+  #cta-final{background:linear-gradient(160deg, #161616, var(--black) 60%);color:#fff;text-align:center;overflow:hidden;position:relative;}
   #cta-final .wrap{position:relative;z-index:2;}
   #cta-final h2{color:#fff;font-size:clamp(2.1rem,4.4vw,3.1rem);max-width:700px;margin:0 auto;line-height:1.2;}
-  #cta-final .cta-blob{position:absolute;border-radius:50%;background:rgba(255,255,255,0.1);}
-  #cta-final .cta-blob.b1{width:340px;height:340px;top:-150px;left:-100px;}
-  #cta-final .cta-blob.b2{width:260px;height:260px;bottom:-130px;right:-60px;}
+  #cta-final .cta-blob{position:absolute;border-radius:50%;background:radial-gradient(circle, rgba(45,168,255,0.22), transparent 70%);filter:blur(10px);}
+  #cta-final .cta-blob.b1{width:420px;height:420px;top:-180px;left:-120px;}
+  #cta-final .cta-blob.b2{width:340px;height:340px;bottom:-160px;right:-80px;}
   #cta-final .btn{margin-top:38px;padding:18px 36px;font-size:1.02rem;}
+  #cta-final .btn-celeste{background:var(--celeste);color:#fff;}
+  #cta-final .btn-celeste:hover{background:#fff;color:var(--black);}
 
   /* ===== FOOTER ===== */
   footer{background:var(--black);color:rgba(255,255,255,0.75);padding:60px 0 30px;}
