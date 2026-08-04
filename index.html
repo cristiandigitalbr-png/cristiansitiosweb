@@ -156,7 +156,27 @@
   .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;filter:brightness(0.9);}
   .hero-veil{position:absolute;inset:0;background:linear-gradient(180deg, rgba(17,17,17,0.72) 0%, rgba(17,17,17,0.6) 45%, rgba(17,17,17,0.8) 100%);}
   .hero-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center;}
-  .hero-inner h1{font-size:clamp(2.5rem,5.6vw,4rem);line-height:1.1;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,0.3);}
+  @keyframes heroFadeUp{
+    from{opacity:0;transform:translateY(24px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  @keyframes lineFromRight{
+    from{opacity:0;transform:translateX(60px);}
+    to{opacity:1;transform:translateX(0);}
+  }
+  @keyframes lineFromLeft{
+    from{opacity:0;transform:translateX(-60px);}
+    to{opacity:1;transform:translateX(0);}
+  }
+  .hero-inner h1{
+    font-size:clamp(2.5rem,5.6vw,4rem);line-height:1.15;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,0.3);
+  }
+  .hero-inner h1 .line{display:block;}
+  .hero-inner h1 .line1{animation:lineFromRight .85s cubic-bezier(.2,.8,.2,1) .15s both;}
+  .hero-inner h1 .line2{animation:lineFromLeft .85s cubic-bezier(.2,.8,.2,1) .45s both;}
+  .hero-inner .lead{animation:heroFadeUp .9s cubic-bezier(.2,.8,.2,1) .75s both;}
+  .hero-inner .hero-cta{animation:heroFadeUp .9s cubic-bezier(.2,.8,.2,1) .9s both;}
+  .hero-inner .hero-stats{animation:heroFadeUp .9s cubic-bezier(.2,.8,.2,1) 1.05s both;}
   .hero-inner h1 span{color:var(--celeste);}
   .hero-inner .lead{margin:26px auto 38px;font-size:1.14rem;color:rgba(255,255,255,0.85);max-width:560px;text-shadow:0 2px 12px rgba(0,0,0,0.25);}
   .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
@@ -185,24 +205,16 @@
   #sobre{padding-top:45px;}
 
   /* ===== BENEFICIOS ===== */
-  .benef-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:165px;gap:18px;}
+  .benef-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   .benef-card{
-    background:var(--white);border:1px solid var(--line);border-radius:18px;padding:28px 26px;
+    background:var(--white);border:1px solid var(--line);border-radius:16px;padding:32px 26px;
     transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s, border-color .3s;
-    display:flex;flex-direction:column;justify-content:flex-end;
   }
   .benef-card:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(17,17,17,0.08);border-color:transparent;}
   .benef-card .icon{width:44px;height:44px;border-radius:11px;background:var(--celeste-tint);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
   .benef-card .icon svg{width:22px;height:22px;stroke:var(--celeste-deep);}
   .benef-card h3{font-size:1.08rem;margin-bottom:8px;}
   .benef-card p{font-size:0.94rem;color:var(--gray);}
-  .benef-card.big{grid-column:span 2;grid-row:span 2;background:var(--black);border-color:transparent;justify-content:space-between;}
-  .benef-card.big .icon{background:rgba(45,168,255,0.16);}
-  .benef-card.big .icon svg{stroke:var(--celeste);}
-  .benef-card.big h3{color:#fff;font-size:1.5rem;}
-  .benef-card.big p{color:rgba(255,255,255,0.62);font-size:1rem;max-width:280px;}
-  .benef-card.full{grid-column:span 4;flex-direction:row;align-items:center;gap:26px;background:var(--celeste-tint);border-color:transparent;}
-  .benef-card.full .icon{margin-bottom:0;flex-shrink:0;background:#fff;}
 
   /* ===== POR QUE ELEGIRME (bento) ===== */
   #porque{background:var(--black);color:#fff;}
@@ -372,9 +384,7 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:960px){
-    .benef-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:auto;}
-    .benef-card.big{grid-column:span 2;grid-row:span 1;justify-content:flex-start;}
-    .benef-card.full{grid-column:span 2;}
+    .benef-grid{grid-template-columns:repeat(2,1fr);}
     .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px;}
     .bento-item.big{grid-column:span 2;grid-row:span 1;}
     .port-grid{grid-template-columns:repeat(2,1fr);}
@@ -396,10 +406,7 @@
     .nav-links.open a{color:var(--black)!important;}
     .nav-cta .btn-outline{display:none;}
     .mobile-toggle{display:block;}
-    .benef-grid{grid-template-columns:1fr;grid-auto-rows:auto;}
-    .benef-card.big{grid-column:span 1;grid-row:span 1;justify-content:flex-start;}
-    .benef-card.full{grid-column:span 1;flex-direction:column;text-align:center;}
-    .benef-card.full .icon{margin-bottom:18px;}
+    .benef-grid{grid-template-columns:1fr;}
     .bento{grid-template-columns:1fr;}
     .bento-item.big{grid-column:span 1;}
     .port-grid{grid-template-columns:1fr;}
@@ -439,7 +446,7 @@
   <div class="hero-veil"></div>
   <div class="wrap">
     <div class="hero-inner reveal-up in">
-      <h1>Tu negocio merece un sitio web que <span>inspire confianza</span></h1>
+      <h1><div class="line line1">Tu negocio merece un sitio web que</div><div class="line line2"><span>inspire confianza</span></div></h1>
       <p class="lead">Convierto visitas en clientes: diseño moderno, carga rápida y una experiencia pensada para vender, lista en 48/72 horas.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://wa.me/5548998163063" target="_blank" rel="noopener">
@@ -465,12 +472,10 @@
       <p>Cada detalle pensado para que tu negocio se vea — y funcione — como una marca de primer nivel.</p>
     </div>
     <div class="benef-grid">
-      <div class="benef-card big reveal-up">
+      <div class="benef-card reveal-up">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <div>
-          <h3>Diseño personalizado</h3>
-          <p>Nada de plantillas genéricas — cada sitio se diseña desde cero para tu marca.</p>
-        </div>
+        <h3>Diseño personalizado</h3>
+        <p>Nada de plantillas genéricas — cada sitio se diseña desde cero para tu marca.</p>
       </div>
       <div class="benef-card reveal-up">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 18h4"/></svg></div>
@@ -492,12 +497,10 @@
         <h3>Entrega rápida</h3>
         <p>Tu sitio listo en 48/72 horas, sin vueltas ni demoras eternas.</p>
       </div>
-      <div class="benef-card full reveal-up">
+      <div class="benef-card reveal-up">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <div>
-          <h3>Alto rendimiento</h3>
-          <p>Código liviano y optimizado, sin cargas lentas que espanten visitantes.</p>
-        </div>
+        <h3>Alto rendimiento</h3>
+        <p>Código liviano y optimizado, sin cargas lentas que espanten visitantes.</p>
       </div>
     </div>
   </div>
