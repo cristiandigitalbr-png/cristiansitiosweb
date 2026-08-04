@@ -185,16 +185,24 @@
   #sobre{padding-top:45px;}
 
   /* ===== BENEFICIOS ===== */
-  .benef-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .benef-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:165px;gap:18px;}
   .benef-card{
-    background:var(--white);border:1px solid var(--line);border-radius:16px;padding:32px 26px;
+    background:var(--white);border:1px solid var(--line);border-radius:18px;padding:28px 26px;
     transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s, border-color .3s;
+    display:flex;flex-direction:column;justify-content:flex-end;
   }
   .benef-card:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(17,17,17,0.08);border-color:transparent;}
   .benef-card .icon{width:44px;height:44px;border-radius:11px;background:var(--celeste-tint);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
   .benef-card .icon svg{width:22px;height:22px;stroke:var(--celeste-deep);}
   .benef-card h3{font-size:1.08rem;margin-bottom:8px;}
   .benef-card p{font-size:0.94rem;color:var(--gray);}
+  .benef-card.big{grid-column:span 2;grid-row:span 2;background:var(--black);border-color:transparent;justify-content:space-between;}
+  .benef-card.big .icon{background:rgba(45,168,255,0.16);}
+  .benef-card.big .icon svg{stroke:var(--celeste);}
+  .benef-card.big h3{color:#fff;font-size:1.5rem;}
+  .benef-card.big p{color:rgba(255,255,255,0.62);font-size:1rem;max-width:280px;}
+  .benef-card.full{grid-column:span 4;flex-direction:row;align-items:center;gap:26px;background:var(--celeste-tint);border-color:transparent;}
+  .benef-card.full .icon{margin-bottom:0;flex-shrink:0;background:#fff;}
 
   /* ===== POR QUE ELEGIRME (bento) ===== */
   #porque{background:var(--black);color:#fff;}
@@ -249,8 +257,25 @@
 
   /* ===== TESTIMONIOS ===== */
   #testi{background:var(--celeste-tint);}
-  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  .testi-card{background:var(--white);border-radius:16px;padding:32px 28px;border:1px solid var(--line);text-align:center;display:flex;flex-direction:column;align-items:center;}
+  .testi-carousel{position:relative;max-width:900px;margin:0 auto;}
+  .testi-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:4px;padding:4px 4px 14px;scrollbar-width:none;}
+  .testi-track::-webkit-scrollbar{display:none;}
+  .testi-card{
+    background:var(--white);border-radius:16px;padding:32px 28px;border:1px solid var(--line);
+    text-align:center;display:flex;flex-direction:column;align-items:center;
+    flex:0 0 300px;scroll-snap-align:start;
+  }
+  .testi-nav{display:flex;justify-content:center;gap:12px;margin-top:26px;}
+  .testi-arrow{
+    width:42px;height:42px;border-radius:50%;background:var(--white);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;transition:background .2s, border-color .2s;
+  }
+  .testi-arrow:hover{background:var(--celeste);border-color:var(--celeste);}
+  .testi-arrow:hover svg{stroke:#fff;}
+  .testi-arrow svg{width:18px;height:18px;stroke:var(--black);transition:stroke .2s;}
+  .testi-dots{display:flex;align-items:center;gap:7px;margin:0 6px;}
+  .testi-dots .dot{width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .2s, transform .2s;}
+  .testi-dots .dot.active{background:var(--celeste);transform:scale(1.3);}
   .testi-card .stars{color:var(--celeste-deep);font-size:0.9rem;letter-spacing:2px;margin-bottom:14px;}
   .testi-card p{font-size:0.98rem;color:var(--black);line-height:1.7;}
   .testi-avatar{
@@ -347,13 +372,14 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:960px){
-    .benef-grid{grid-template-columns:repeat(2,1fr);}
+    .benef-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:auto;}
+    .benef-card.big{grid-column:span 2;grid-row:span 1;justify-content:flex-start;}
+    .benef-card.full{grid-column:span 2;}
     .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px;}
     .bento-item.big{grid-column:span 2;grid-row:span 1;}
     .port-grid{grid-template-columns:repeat(2,1fr);}
     .timeline{grid-template-columns:repeat(1,1fr);gap:34px;}
     .timeline::before{display:none;}
-    .testi-grid{grid-template-columns:1fr;}
     .hero-stats{grid-template-columns:repeat(3,1fr);}
   }
   @media (max-width:680px){
@@ -370,7 +396,10 @@
     .nav-links.open a{color:var(--black)!important;}
     .nav-cta .btn-outline{display:none;}
     .mobile-toggle{display:block;}
-    .benef-grid{grid-template-columns:1fr;}
+    .benef-grid{grid-template-columns:1fr;grid-auto-rows:auto;}
+    .benef-card.big{grid-column:span 1;grid-row:span 1;justify-content:flex-start;}
+    .benef-card.full{grid-column:span 1;flex-direction:column;text-align:center;}
+    .benef-card.full .icon{margin-bottom:18px;}
     .bento{grid-template-columns:1fr;}
     .bento-item.big{grid-column:span 1;}
     .port-grid{grid-template-columns:1fr;}
@@ -436,10 +465,12 @@
       <p>Cada detalle pensado para que tu negocio se vea — y funcione — como una marca de primer nivel.</p>
     </div>
     <div class="benef-grid">
-      <div class="benef-card reveal-up">
+      <div class="benef-card big reveal-up">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <h3>Diseño personalizado</h3>
-        <p>Nada de plantillas genéricas — cada sitio se diseña desde cero para tu marca.</p>
+        <div>
+          <h3>Diseño personalizado</h3>
+          <p>Nada de plantillas genéricas — cada sitio se diseña desde cero para tu marca.</p>
+        </div>
       </div>
       <div class="benef-card reveal-up">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 18h4"/></svg></div>
@@ -461,10 +492,12 @@
         <h3>Entrega rápida</h3>
         <p>Tu sitio listo en 48/72 horas, sin vueltas ni demoras eternas.</p>
       </div>
-      <div class="benef-card reveal-up">
+      <div class="benef-card full reveal-up">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <h3>Alto rendimiento</h3>
-        <p>Código liviano y optimizado, sin cargas lentas que espanten visitantes.</p>
+        <div>
+          <h3>Alto rendimiento</h3>
+          <p>Código liviano y optimizado, sin cargas lentas que espanten visitantes.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -542,24 +575,31 @@
       <div class="eyebrow">Testimonios</div>
       <h2>La opinión de quienes ya confiaron</h2>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal-up">
-        <div class="stars">★★★★★</div>
-        <p>"El sitio quedó mucho mejor de lo que imaginaba. Todo el proceso fue rápido y muy claro."</p>
-        <div class="testi-avatar">MR</div>
-        <div class="who">Marcela R.</div>
+    <div class="testi-carousel">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"El sitio quedó mucho mejor de lo que imaginaba. Todo el proceso fue rápido y muy claro."</p>
+          <div class="testi-avatar">MR</div>
+          <div class="who">Marcela R.</div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"Excelente comunicación de principio a fin. Ya recibí varias consultas nuevas por el sitio."</p>
+          <div class="testi-avatar">DT</div>
+          <div class="who">Diego T.</div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"Diseño moderno, entrega rápida y muy buena relación precio-calidad. Lo recomiendo."</p>
+          <div class="testi-avatar">VL</div>
+          <div class="who">Valentina L.</div>
+        </div>
       </div>
-      <div class="testi-card reveal-up">
-        <div class="stars">★★★★★</div>
-        <p>"Excelente comunicación de principio a fin. Ya recibí varias consultas nuevas por el sitio."</p>
-        <div class="testi-avatar">DT</div>
-        <div class="who">Diego T.</div>
-      </div>
-      <div class="testi-card reveal-up">
-        <div class="stars">★★★★★</div>
-        <p>"Diseño moderno, entrega rápida y muy buena relación precio-calidad. Lo recomiendo."</p>
-        <div class="testi-avatar">VL</div>
-        <div class="who">Valentina L.</div>
+      <div class="testi-nav">
+        <button class="testi-arrow" id="testiPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="testi-dots" id="testiDots"></div>
+        <button class="testi-arrow" id="testiNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
       </div>
     </div>
   </div>
@@ -741,6 +781,29 @@
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:0.15});
   document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+
+  // Testimonios carousel
+  const tTrack = document.getElementById('testiTrack');
+  const tDotsWrap = document.getElementById('testiDots');
+  const tCards = tTrack.querySelectorAll('.testi-card');
+  tCards.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => tTrack.scrollTo({left: tCards[i].offsetLeft - tTrack.offsetLeft, behavior:'smooth'}));
+    tDotsWrap.appendChild(d);
+  });
+  const tDots = tDotsWrap.querySelectorAll('.dot');
+  function updateTestiDots(){
+    let idx = 0, min = Infinity;
+    tCards.forEach((c, i) => {
+      const diff = Math.abs(c.offsetLeft - tTrack.offsetLeft - tTrack.scrollLeft);
+      if(diff < min){ min = diff; idx = i; }
+    });
+    tDots.forEach((d,i) => d.classList.toggle('active', i === idx));
+  }
+  tTrack.addEventListener('scroll', () => { window.requestAnimationFrame(updateTestiDots); }, {passive:true});
+  document.getElementById('testiPrev').addEventListener('click', () => tTrack.scrollBy({left: -320, behavior:'smooth'}));
+  document.getElementById('testiNext').addEventListener('click', () => tTrack.scrollBy({left: 320, behavior:'smooth'}));
 
   // FAQ accordion
   document.querySelectorAll('.faq-item').forEach(item => {
